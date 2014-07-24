@@ -1,6 +1,14 @@
+@font-face {
+  font-family: 'apercu';
+  src: url('lib/font/apercu_mono_pro.otf') format('otf');
+}
+
+body {
+	font-family: apercu, Fallback, 'Droid Sans Mono';
+}
+
 small.ok-orange {
 	background-color: rgb(255, 84, 73);
-	font-family: 'Droid Sans Mono', monospace;
 	padding: 3px;
 }
 
@@ -20,10 +28,6 @@ span.bold {
 
 #about, #how, #goals, #support, #whats-next, #important-stuff {
 	text-align: left;
-}
-
-#about, #how, #goals {
-	font-family: 'Droid Sans Mono', monospace;
 }
 
 #about p, #how p, #goals p {
@@ -57,7 +61,6 @@ span.bold {
     bottom:180px;
     right:30px;
     z-index:1;
-    font-family:'Droid Sans Mono',Arial,sans-serif;
     -webkit-transform: rotate(-15deg); /* Safari */
     -moz-transform: rotate(-15deg); /* Firefox */
     -ms-transform: rotate(-15deg); /* IE */

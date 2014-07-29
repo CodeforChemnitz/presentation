@@ -13,7 +13,7 @@
 		<link rel="stylesheet" href="css/ok/ok.css">
 		<link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="css/github-highlight.css">
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
 			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
@@ -140,6 +140,98 @@
 					<section>
 						<h3>Baustellenkarte</h3>
 						<iframe src="http://codeforchemnitz.de/BaustellenChemnitz/#/expanded=true" style="width:100%;height:87%;"></iframe>
+					</section>
+					<section>
+						<img src="images/Uebersicht-Baustellen.png" />
+						<img src="images/Detail-Baustelle.png" />
+					</section>
+					<section>
+						<h3>Daten abrufen und parsen</h3>
+						<ol>
+							<li class="fragment">Übersicht-Webseite abrufen</li>
+							<li class="fragment">URLs für Detailseiten finden</li>
+							<li class="fragment">Detailseiten abrufen</li>
+							<li class="fragment">Daten versuchen zu interpretieren (Datum, Lagebeziehungen)</li>
+							<li class="fragment">Daten als Schlüssel-Wert-Paare abspeichern</li>
+						</ol>
+					</section>
+					<section>
+						<h3>Daten abrufen und parsen (II)</h3>
+
+						<span>seit 10.05.2013</span>
+						<pre><code class="json hljs">{
+	"since": "2013-05-10",
+	"until": null
+}</code></pre>
+
+						<span>von 10.05.2013 bis 15.06.2013</span>
+						<pre><code class="json hljs">{
+	"since": "2013-05-10",
+	"until": "2013-06-15"
+}</code></pre>
+
+					</section>
+					<section>
+						<h3>Daten abrufen und parsen (III)</h3>
+
+<span>zwischen Lange Straße und Leipziger Straße</span>
+						<pre><code class="json hljs">{
+	"relation": "between",
+	"streets": ["Lange Straße", "Leipziger Straße"]
+}</code></pre>
+<span>Kreuzung Bornaer Straße/Wittgensdorfer Straße</span>
+						<pre><code class="json hljs">{
+	"relation": "intersection",
+	"streets": ["Bornaer Straße", "Wittgensdorfer Straße"]
+}</code></pre>
+					</section>
+					<section>
+						<h3>Und nun?</h3>
+						<pre><code class="json hljs">{
+	"relation": "intersection",
+	"streets": ["Bornaer Straße", "Wittgensdorfer Straße"]
+}</code></pre>
+
+						<span class="fragment" style="font-size:70px;">↓</span>
+
+						<pre class="fragment"><code class="json hljs">{
+	"lat": 50.840775,
+	"lng": 12.906360
+}</code></pre>
+
+					</section>
+					<section>
+						<h3 class="fragment">OpenStreetMap</h3>
+						<img src="images/osm.png" style="box-shadow: none;"><br />
+						<img class="fragment" style="box-shadow: none;" src="images/overpass.png">
+
+					</section>
+					<section>
+						<pre style="width:100%;"><code class="hljs xml"><osm-script>
+    <osm-script output="json" timeout="25">
+        <id-query into="area" {{nominatimArea:Chemnitz}} type="area"></id-query>
+        <union>
+            <query type="way">
+                <has-kv k="name" v="PLACEHOLDER"></has-kv>
+                <area-query from="area"></area-query>
+            </query>
+        </union>
+        <print mode="body"></print>
+        <recurse type="down"></recurse>
+        <print mode="skeleton" order="quadtile"></print>
+    </osm-script>
+</osm-script></code></pre>
+					</section>
+					<section>
+						<h3>Schnittstellen finden</h3>
+					</section>
+					<section>
+						<img src="images/kreuz.png">
+					</section>
+					<section>
+						<h3>Maifeuer</h3>
+						<img src="images/Maifeuer-Sachsen-Fernsehen.png" /><br />
+						<a href="http://www.sachsen-fernsehen.de/Aktuell/Chemnitz/Artikel/1353000/Liste-der-stattfindenden-Hexenfeuer-in-Chemnitz-2014/" style="font-size: 15px;">Quelle: Sachsen Fernsehen</a>
 					</section>
 					<section>
 						<h3>Maifeuer</h3>

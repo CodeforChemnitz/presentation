@@ -23,6 +23,7 @@ section img.logo, #timeline img {
 
 section img.logo {
 	height: 400px;
+    box-shadow: 0 0 0px #fff !important;
 }
 
 span.bold {

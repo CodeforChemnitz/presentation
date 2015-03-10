@@ -385,6 +385,62 @@ Lage: Kreuzung Schulstraße</code></pre>
 					<h4>codeforchemnitz@lists.okfn.org</h4>
 					<h4>codeforchemnitz.de</h4>
 				</section>
+
+				<section>
+					<section>
+						<h2>Tooling</h2>
+					</section>
+					<section>
+						<h3>overpy</h3>
+						<pre><code>import overpy
+
+api = overpy.Overpass()
+
+# fetch all ways and nodes
+result = api.query("""
+  way["name"="%s"] ["highway"];
+  (._;>;);
+  out body;
+  """%('Rathausstraße'))
+
+# print lat/lon for all nodes in all ways
+for way in result.ways:
+  print("Name: %s" % way.tags.get("name", "n/a"))
+  for node in way.nodes:
+    print("Lat: %f, Lon: %f" % (node.lat, node.lon))</code></pre>
+					</section>
+					<section>
+						<h4>Overpass-XML</h4>
+						<pre><code><osm-script output="json" timeout="25">
+<id-query into="area" ref="3600062594" type="area"></id-query>
+
+<query type="way">
+    <has-kv k="name" v="%s"></has-kv>
+    <has-kv k="highway" ></has-kv>
+    <area-query from="area"></area-query>
+</query>
+
+<print mode="body"></print>
+<recurse type="down"></recurse>
+<print mode="skeleton" order="quadtile"></print>
+</osm-script>
+</code></pre>
+					</section>
+					<section>
+					<h4>Overpass-QML</h4>
+						<pre><code>area(3600062594)->.chemnitz;
+(
+  way
+    ["name"="%s"]
+    ["highway"]
+    (area.chemnitz);
+);
+out body;
+>;
+out skel qt;
+</code></pre>
+					</section>
+				</section>
 			</div>
 		</div>
 

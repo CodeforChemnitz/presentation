@@ -15,10 +15,6 @@ module.exports = function(grunt) {
 				' */'
 		},
 
-		qunit: {
-			files: [ 'test/*.html' ]
-		},
-
 		uglify: {
 			options: {
 				banner: '<%= meta.banner %>\n'
@@ -96,6 +92,21 @@ module.exports = function(grunt) {
 			]
 		},
 
+        jade: {
+            compile: {
+                options: {
+                    data: {
+                        debug: false,
+                        pretty: true
+                    }
+                },
+                files: {
+                    "index.html": ["index.jade"],
+                    "vortrag.html": ["vortrag.jade"]
+                }
+            }
+        },
+
 		watch: {
 			main: {
 				files: [ 'Gruntfile.js', 'js/reveal.js', 'css/reveal.css' ],
@@ -104,7 +115,11 @@ module.exports = function(grunt) {
 			theme: {
 				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
 				tasks: 'themes'
-			}
+			},
+            jade: {
+                files: [ '*.jade' ],
+                tasks: 'jade'
+            }
 		}
 
 	});
@@ -117,10 +132,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-contrib-sass' );
 	grunt.loadNpmTasks( 'grunt-contrib-connect' );
+    grunt.loadNpmTasks( 'grunt-contrib-jade' );
 	grunt.loadNpmTasks( 'grunt-zip' );
 
 	// Default task
-	grunt.registerTask( 'default', [ 'jshint', 'cssmin', 'uglify', 'qunit' ] );
+	grunt.registerTask( 'default', [ 'jade', 'jshint', 'cssmin', 'uglify', 'qunit' ] );
 
 	// Theme task
 	grunt.registerTask( 'themes', [ 'sass' ] );

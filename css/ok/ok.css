@@ -42,6 +42,9 @@ span.bold {
 	margin: 15px 0;
 }
 
+.reveal .state-background {
+	background: rgba(254, 254, 254, 1.0 );
+}
 .ok-lab-blue .reveal .state-background {
 	background: rgba(32, 184, 247, 1.0 );
 }
@@ -96,4 +99,12 @@ section > .copyright-note {
 	margin-right: 25px;
 	margin-top: -25px;
 	color: grey !important;
+}
+
+#wordcloud > span {
+	vertical-align: middle;
+}
+
+#wordcloud > .red-red-red {
+	color: rgb(202, 5, 5) !important;
 }

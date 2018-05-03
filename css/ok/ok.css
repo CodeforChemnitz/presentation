@@ -26,6 +26,10 @@ section img.logo {
     box-shadow: 0 0 0px #fff !important;
 }
 
+.reveal section img.no-shadow {
+    box-shadow: none;
+}
+
 span.bold {
 	font-weight: bold;
 }
